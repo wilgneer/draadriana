@@ -1,4 +1,6 @@
-// Mobile menu
+// ====================================
+// MOBILE MENU
+// ====================================
 const burger = document.getElementById("burger");
 const mobileNav = document.getElementById("mobileNav");
 
@@ -6,92 +8,165 @@ if (burger && mobileNav) {
   burger.addEventListener("click", () => {
     const isOpen = mobileNav.style.display === "block";
     mobileNav.style.display = isOpen ? "none" : "block";
+    burger.classList.toggle("active");
   });
 
   mobileNav.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", () => (mobileNav.style.display = "none"));
+    a.addEventListener("click", () => {
+      mobileNav.style.display = "none";
+      burger.classList.remove("active");
+    });
   });
 }
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener("click", (e) => {
-    const id = a.getAttribute("href");
-    const el = document.querySelector(id);
-    if (!el) return;
+// ====================================
+// SMOOTH SCROLL (offset dinâmico)
+// ====================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", (e) => {
+    const id = anchor.getAttribute("href");
+    const target = document.querySelector(id);
+
+    if (!target) return;
 
     e.preventDefault();
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    const header = document.querySelector('.topbar');
+    const offset = (header && window.getComputedStyle(header).display !== 'none') ? header.offsetHeight : 0;
+
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth"
+    });
   });
 });
 
-// Reveal on scroll
-const revealEls = [...document.querySelectorAll("[data-reveal]")];
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) entry.target.classList.add("revealed");
-  });
-}, { threshold: 0.12 });
-revealEls.forEach(el => io.observe(el));
+// ====================================
+// REVEAL ON SCROLL (Intersection Observer)
+// ====================================
+const revealElements = document.querySelectorAll("[data-reveal]");
 
-/* Modal Lead */
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+      }
+    });
+  },
+  {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  }
+);
+
+revealElements.forEach((el) => revealObserver.observe(el));
+
+// ====================================
+// MODAL LEAD
+// ====================================
 const modal = document.getElementById("leadModal");
-const openBtns = document.querySelectorAll(".js-open-lead");
+const openButtons = document.querySelectorAll(".js-open-lead");
 const closeTargets = modal ? modal.querySelectorAll("[data-close-modal]") : [];
 const leadForm = document.getElementById("leadForm");
 const formStatus = document.getElementById("formStatus");
 
-function openModal(){
+function openModal() {
   if (!modal) return;
+
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 
-  // foco no primeiro input
   const firstInput = modal.querySelector("input[name='nome']");
-  if (firstInput) setTimeout(() => firstInput.focus(), 50);
+  if (firstInput) setTimeout(() => firstInput.focus(), 100);
 }
 
-function closeModal(){
+function closeModal() {
   if (!modal) return;
+
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
 
-openBtns.forEach(btn => btn.addEventListener("click", openModal));
-closeTargets.forEach(el => el.addEventListener("click", closeModal));
+openButtons.forEach((btn) => btn.addEventListener("click", openModal));
+closeTargets.forEach((el) => el.addEventListener("click", closeModal));
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal?.classList.contains("is-open")) closeModal();
+  if (e.key === "Escape" && modal?.classList.contains("is-open")) {
+    closeModal();
+  }
 });
 
-// Submit (placeholder)
+// ====================================
+// FORM SUBMISSION (simulado)
+// ====================================
 if (leadForm) {
-  leadForm.addEventListener("submit", (e) => {
+  leadForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const data = Object.fromEntries(new FormData(leadForm).entries());
+    const formData = new FormData(leadForm);
+    const data = Object.fromEntries(formData.entries());
 
-    // validação simples
     if (!data.nome || !data.email || !data.whatsapp) {
-      if (formStatus) formStatus.textContent = "Por favor, preencha Nome, Email e WhatsApp.";
+      if (formStatus) {
+        formStatus.textContent = "Por favor, preencha Nome, Email e WhatsApp.";
+        formStatus.style.color = "#ff0000";
+      }
       return;
     }
 
-    if (formStatus) formStatus.textContent = "Enviando...";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      if (formStatus) {
+        formStatus.textContent = "Por favor, insira um email válido.";
+        formStatus.style.color = "#ff0000";
+      }
+      return;
+    }
 
-    // Simula envio (troco para API/Planilha quando você quiser)
-   setTimeout(() => {
-  if (formStatus) formStatus.textContent = "Recebido! Redirecionando... ✓";
-  leadForm.reset();
+    if (formStatus) {
+      formStatus.textContent = "Enviando...";
+      formStatus.style.color = "#5c00a8";
+    }
 
-  // redireciona após 0.8s
-  setTimeout(() => {
-    window.location.href = "obrigado.html";
-  }, 800);
+    // Simula API
+    await new Promise(resolve => setTimeout(resolve, 800));
 
-}, 700);
+    if (formStatus) {
+      formStatus.textContent = "Recebido! Redirecionando... ✓";
+      formStatus.style.color = "#25D366";
+    }
+
+    leadForm.reset();
+
+    setTimeout(() => {
+      window.location.href = "obrigado.html";
+    }, 1000);
   });
 }
 
+// ====================================
+// TOPBAR SHADOW ON SCROLL
+// ====================================
+const topbar = document.querySelector(".topbar");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    topbar?.classList.add("scrolled");
+  } else {
+    topbar?.classList.remove("scrolled");
+  }
+});
+
+const style = document.createElement("style");
+style.textContent = `
+  .topbar.scrolled {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.92);
+  }
+`;
+document.head.appendChild(style);

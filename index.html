@@ -7,17 +7,18 @@
   <meta name="description" content="Orientação jurídica clara e humana para fibromialgia e benefícios do INSS. Guia FIBROPREV – Edição 2026." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  
 </head>
 
 <body>
+  <!-- Animated Background Gradient -->
+  <div class="bg-gradient" aria-hidden="true"></div>
+
   <!-- Topbar -->
   <header class="topbar" id="top">
     <div class="container topbar__inner">
       <a class="brand" href="#top" aria-label="Ir para o topo">
-        <!-- LOGO IMG -->
         <img class="brand__logo" src="assets/logo.png" alt="Logo Dra. Adriana" />
         <div class="brand__text">
           <strong>Dra. Adriana</strong>
@@ -48,46 +49,65 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero__bg">
-      <img class="hero__banner" src="assets/DRA_ADRIANA4.png" alt="Banner Dra. Adriana Fibromialgia" />
-      <div class="hero__overlay" aria-hidden="true"></div>
+  <section class="hero hero--simple" id="inicio">
+    <div class="container">
+      <div class="heroSimple">
+        <!-- Copy -->
+         <div class="heroSimple__copy" data-reveal>
+    <!-- Produto em primeiro no mobile -->     
+    <div class="heroSimple__book heroSimple__book--mobile" aria-label="Capa do produto">
+      <img src="assets/Dra2.png" alt="Capa do guia FIBROPREV" />
     </div>
 
-    <div class="container hero__content">
-      <div class="hero__card" data-reveal>
-        <div class="badge">Especialista em Fibromialgia</div>
-
-        <h1 class="hero__title">
-          Transformando <em>dor</em> em <span>dignidade</span>
-        </h1>
-
-        <p class="hero__subtitle">
-          Orientação jurídica clara e humana para você acessar benefícios do INSS com segurança mesmo após negativas.
-        </p>
-
-        <div class="hero__actions">
-          <!-- ABRE MODAL -->
-          <button class="btn btn--primary js-open-lead" type="button">
-            Quero entender meus direitos <span class="btn__arrow">→</span>
-          </button>
-          <a class="btn btn--ghost" href="#fibroprev">Ver o guia</a>
-        </div>
-
-        <div class="hero__trust">
-          <div class="trustPill">Atendimento no Brasil</div>
-          <div class="trustPill">Linguagem simples</div>
-          <div class="trustPill">Plano de ação</div>
-        </div>
+  <div class="heroCard">
+    <!-- Produto em primeiro no mobile -->
+    
+    <div class="heroSimple__brand">
+      <img class="heroSimple__brandLogo" src="assets/fibro.png" alt="FIBROPREV" />
+      <span class="heroSimple__edition">Edição 2026</span>
+    </div>
+    
+    <!-- TÍTULO MELHORADO -->
+    <h1 class="heroSimple__title">
+      Benefício do INSS para Fibromialgia
+      <span>com clareza, estratégia e dignidade</span>
+    </h1>
+    
+    <!-- SUBTÍTULO MELHORADO -->
+    <p class="heroSimple__desc">
+      O FIBROPREV é um guia jurídico e prático para você organizar documentos, entender seus direitos e
+      aumentar suas chances no pedido sem confusão e sem achismos.
+    </p>
+    
+    <div class="heroSimple__event" aria-label="Data e horário">
+      <span>26 de Fevereiro</span>
+      <span> 19h • Online</span>
+    </div>
+    
+    <button class="btn btn--cta js-open-lead" type="button">
+      Quero participar da aula ->
+    </button>
+    
+    <div class="heroSimple__expert" aria-label="Sobre a autora">
+      <div class="heroSimple__expertText">
+        <strong>Dra. Adriana Ramalho</strong>
+        <span>Direito Previdenciário • Fibromialgia</span>
       </div>
+    </div>
+    </div>
+    
+    </div>
+
+        
+        
     </div>
   </section>
 
   <!-- SOBRE -->
-  <section class="section section--light" id="sobre">
+  <section class="section section--gradient" id="sobre">
     <div class="container">
       <div class="sectionHead" data-reveal>
-        <div class="eyebrow">POR QUE ESPECIALISTA</div>
+        <div class="eyebrow eyebrow--gradient">POR QUE ESPECIALISTA</div>
         <h2>Você não precisa enfrentar isso sozinha</h2>
         <p>
           Fibromialgia exige cuidado e estratégia. Aqui você encontra orientação direta, sem confusão e com foco em resultado.
@@ -95,31 +115,35 @@
       </div>
 
       <div class="grid3">
-        <article class="card" data-reveal>
-          <div class="iconBox" aria-hidden="true">🏛️</div>
+        <article class="card card--hover" data-reveal style="--delay: 0.1s">
+          <div class="card__glow"></div>
+          <div class="iconBox iconBox--gradient">🏛️</div>
           <h3>INSS e perícia</h3>
           <p>Entenda o que é exigido e como se preparar para aumentar suas chances com segurança.</p>
         </article>
 
-        <article class="card" data-reveal>
-          <div class="iconBox" aria-hidden="true">📄</div>
+        <article class="card card--hover" data-reveal style="--delay: 0.2s">
+          <div class="card__glow"></div>
+          <div class="iconBox iconBox--gradient">📄</div>
           <h3>Documentação correta</h3>
           <p>Laudos, exames e relatórios do jeito certo evitando falhas que geram indeferimento.</p>
         </article>
 
-        <article class="card" data-reveal>
-          <div class="iconBox" aria-hidden="true">🧭</div>
+        <article class="card card--hover" data-reveal style="--delay: 0.3s">
+          <div class="card__glow"></div>
+          <div class="iconBox iconBox--gradient">🧭</div>
           <h3>Estratégia e recursos</h3>
           <p>Se houver negativa, você sabe o que fazer: próximos passos, recursos e postura correta.</p>
         </article>
       </div>
 
-      <div class="sectionCta" data-reveal>
+      <div class="sectionCta sectionCta--gradient" data-reveal>
         <div class="sectionCta__box">
           <h3>Quer entender qual caminho faz sentido para o seu caso?</h3>
           <p>Me conte o básico e receba um direcionamento inicial com clareza.</p>
         </div>
-        <button class="btn btn--primary js-open-lead" type="button">
+        <button class="btn btn--primary btn--pulse js-open-lead" type="button">
+          <span class="btn__glow"></span>
           Quero entender <span class="btn__arrow">→</span>
         </button>
       </div>
@@ -127,16 +151,17 @@
   </section>
 
   <!-- COMO FUNCIONA -->
-  <section class="section section--tint">
+  <section class="section section--light">
     <div class="container">
       <div class="sectionHead" data-reveal>
-        <div class="eyebrow">COMO FUNCIONA</div>
+        <div class="eyebrow eyebrow--gradient">COMO FUNCIONA</div>
         <h2>Um caminho prático do primeiro passo ao resultado</h2>
         <p>Uma metodologia objetiva para sair da dúvida e caminhar com clareza.</p>
       </div>
 
       <div class="steps">
-        <div class="step card card--subtle" data-reveal>
+        <div class="step card card--hover" data-reveal style="--delay: 0.1s">
+          <div class="card__glow"></div>
           <div class="step__num">01</div>
           <div>
             <h3>Análise do seu caso</h3>
@@ -144,7 +169,8 @@
           </div>
         </div>
 
-        <div class="step card card--subtle" data-reveal>
+        <div class="step card card--hover" data-reveal style="--delay: 0.2s">
+          <div class="card__glow"></div>
           <div class="step__num">02</div>
           <div>
             <h3>Checklist de documentos</h3>
@@ -152,7 +178,8 @@
           </div>
         </div>
 
-        <div class="step card card--subtle" data-reveal>
+        <div class="step card card--hover" data-reveal style="--delay: 0.3s">
+          <div class="card__glow"></div>
           <div class="step__num">03</div>
           <div>
             <h3>Estratégia de solicitação</h3>
@@ -160,7 +187,8 @@
           </div>
         </div>
 
-        <div class="step card card--subtle" data-reveal>
+        <div class="step card card--hover" data-reveal style="--delay: 0.4s">
+          <div class="card__glow"></div>
           <div class="step__num">04</div>
           <div>
             <h3>Acompanhamento e recursos</h3>
@@ -171,18 +199,22 @@
     </div>
   </section>
 
-  <!-- FIBROPREV: FOTO ESQ + RESUMO DIR -->
+  <!-- FIBROPREV -->
   <section class="section section--dark" id="fibroprev">
+    <div class="section__glow section__glow--purple"></div>
+    <div class="section__glow section__glow--yellow"></div>
+
     <div class="container">
       <div class="book">
         <div class="book__left" data-reveal>
-          <!-- FOTO DO LIVRO -->
-          <img class="book__cover" src="assets/fibrolivro.jpeg" alt="Capa do guia FIBROPREV" />
+          <div class="book__wrapper">
+            <img class="book__cover" src="assets/fibrolivro.jpeg" alt="Capa do guia FIBROPREV" />
+            <div class="book__shine"></div>
+          </div>
         </div>
 
         <div class="book__right" data-reveal>
           <div class="fibroBrand">
-            <!-- LOGO FIBROPREV -->
             <img class="fibroBrand__logo" src="assets/fibro.png" alt="Logo FIBROPREV" />
             <span class="fibroBrand__edition">Edição 2026</span>
           </div>
@@ -193,14 +225,15 @@
           </p>
 
           <ul class="checklist checklist--dark">
-            <li>Direitos e benefícios possíveis</li>
-            <li>Documentos necessários (sem confusão)</li>
-            <li>Estratégias de solicitação</li>
-            <li>Como lidar com negativas</li>
+            <li><span class="checklist__check">✓</span> Direitos e benefícios possíveis</li>
+            <li><span class="checklist__check">✓</span> Documentos necessários (sem confusão)</li>
+            <li><span class="checklist__check">✓</span> Estratégias de solicitação</li>
+            <li><span class="checklist__check">✓</span> Como lidar com negativas</li>
           </ul>
 
           <div class="product__actions">
-            <button class="btn btn--primary js-open-lead" type="button">
+            <button class="btn btn--primary btn--pulse js-open-lead" type="button">
+              <span class="btn__glow"></span>
               Quero entender <span class="btn__arrow">→</span>
             </button>
             <a class="btn btn--ghost btn--ghostDark" href="#videos">Ver vídeos</a>
@@ -214,26 +247,23 @@
   <section class="section section--light" id="videos">
     <div class="container">
       <div class="sectionHead" data-reveal>
-        <div class="eyebrow">VÍDEOS</div>
-        <h2>Explicações rápidas da Dra. para te orientar</h2>
-        <p>Conteúdo direto ao ponto para tirar dúvidas comuns sobre fibromialgia e benefícios.</p>
+        <div class="eyebrow eyebrow--gradient">VÍDEOS</div>
+        <h2>Conteúdo que esclarece suas dúvidas</h2>
+        <p>Assista a explicações práticas e diretas sobre os principais pontos do processo.</p>
       </div>
 
       <div class="videoGrid">
-        <!-- CARD VÍDEO 1 -->
-        <article class="videoCard" data-reveal>
+        <article class="videoCard" data-reveal style="--delay: 0.1s">
           <div class="videoCard__frame">
-            <!-- Troque por embed do YouTube se quiser -->
             <video class="videoCard__video" controls preload="metadata">
               <source src="assets/video-01.mp4" type="video/mp4" />
-              Seu navegador não suporta vídeo.
             </video>
           </div>
           <h3>Quais benefícios podem se aplicar ao meu caso?</h3>
           <p>Entenda o panorama e como identificar o caminho mais adequado.</p>
         </article>
 
-        <article class="videoCard" data-reveal>
+        <article class="videoCard" data-reveal style="--delay: 0.2s">
           <div class="videoCard__frame">
             <video class="videoCard__video" controls preload="metadata">
               <source src="assets/video-02.mp4" type="video/mp4" />
@@ -243,7 +273,7 @@
           <p>Como evitar erros comuns que atrasam ou prejudicam o pedido.</p>
         </article>
 
-        <article class="videoCard" data-reveal>
+        <article class="videoCard" data-reveal style="--delay: 0.3s">
           <div class="videoCard__frame">
             <video class="videoCard__video" controls preload="metadata">
               <source src="assets/video-03.mp4" type="video/mp4" />
@@ -254,12 +284,13 @@
         </article>
       </div>
 
-      <div class="sectionCta" data-reveal>
+      <div class="sectionCta sectionCta--gradient" data-reveal>
         <div class="sectionCta__box">
           <h3>Quer um direcionamento inicial no seu caso?</h3>
           <p>Preencha seus dados e a equipe entra em contato.</p>
         </div>
-        <button class="btn btn--primary js-open-lead" type="button">
+        <button class="btn btn--primary btn--pulse js-open-lead" type="button">
+          <span class="btn__glow"></span>
           Quero entender <span class="btn__arrow">→</span>
         </button>
       </div>
@@ -267,50 +298,51 @@
   </section>
 
   <!-- FAQ -->
-  <section class="section section--tint" id="faq">
+  <section class="section section--gradient" id="faq">
     <div class="container">
       <div class="sectionHead" data-reveal>
-        <div class="eyebrow">FAQ</div>
+        <div class="eyebrow eyebrow--gradient">FAQ</div>
         <h2>Perguntas frequentes</h2>
         <p>Respostas claras para dúvidas que aparecem o tempo todo.</p>
       </div>
 
       <div class="faq" data-reveal>
         <details class="faq__item">
-          <summary>Fibromialgia dá direito a benefício no INSS?</summary>
+          <summary><span class="faq__icon">→</span> Fibromialgia dá direito a benefício no INSS?</summary>
           <div class="faq__content">
             Depende do caso. O ponto central é demonstrar como os sintomas impactam sua capacidade de trabalho, com documentação adequada e estratégia.
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>Quais documentos são mais importantes?</summary>
+          <summary><span class="faq__icon">→</span> Quais documentos são mais importantes?</summary>
           <div class="faq__content">
             Em geral: laudos recentes, relatórios detalhados, exames, histórico de tratamentos e documentos que descrevam limitações funcionais.
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>Se eu for negada, acabou?</summary>
+          <summary><span class="faq__icon">→</span> Se eu for negada, acabou?</summary>
           <div class="faq__content">
             Não. Existem caminhos possíveis como recurso, revisão e outras estratégias. O importante é agir com orientação e dentro dos prazos.
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>O atendimento é online?</summary>
+          <summary><span class="faq__icon">→</span> O atendimento é online?</summary>
           <div class="faq__content">
             Sim, é possível conduzir etapas online, dependendo do caso e da documentação.
           </div>
         </details>
       </div>
 
-      <div class="sectionCta" data-reveal>
+      <div class="sectionCta sectionCta--gradient" data-reveal>
         <div class="sectionCta__box">
           <h3>Ficou com alguma dúvida?</h3>
           <p>Me conte seu cenário e a equipe te orienta com clareza.</p>
         </div>
-        <button class="btn btn--primary js-open-lead" type="button">
+        <button class="btn btn--primary btn--pulse js-open-lead" type="button">
+          <span class="btn__glow"></span>
           Quero entender <span class="btn__arrow">→</span>
         </button>
       </div>
@@ -319,6 +351,9 @@
 
   <!-- CONTATO FINAL -->
   <section class="section section--dark" id="contato">
+    <div class="section__glow section__glow--purple"></div>
+    <div class="section__glow section__glow--yellow"></div>
+
     <div class="container">
       <div class="ctaCard" data-reveal>
         <h2>Vamos dar o próximo passo com calma e clareza</h2>
@@ -327,7 +362,8 @@
         </p>
 
         <div class="ctaCard__actions">
-          <button class="btn btn--primary js-open-lead" type="button">
+          <button class="btn btn--primary btn--pulse js-open-lead" type="button">
+            <span class="btn__glow"></span>
             Quero entender <span class="btn__arrow">→</span>
           </button>
           <a class="btn btn--ghost btn--ghostDark" href="https://wa.me/5500000000000" target="_blank" rel="noopener">
@@ -357,7 +393,7 @@
 
         <div class="footer__col">
           <h4>Seções</h4>
-          <a href="#top">Início</a>
+          <a href="#inicio">Início</a>
           <a href="#sobre">Sobre</a>
           <a href="#fibroprev">FIBROPREV</a>
           <a href="#videos">Vídeos</a>
@@ -379,19 +415,19 @@
 
       <div class="footer__bottom">
         <span>© 2026 Dra. Adriana Ramalho Gonçalves. Todos os direitos reservados.</span>
-        <span class="footer__muted">Design flat • Acessível • Profissional</span>
+        <span class="footer__muted">Design profissional • Acessível • Conversão otimizada</span>
       </div>
     </div>
   </footer>
 
-<!-- WhatsApp Floating Button -->
-<a class="wa-float"
-    href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20quero%20entender%20meu%20caso%20sobre%20fibromialgia."
-    target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-    <img class="wa-float__icon" src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="" aria-hidden="true" />
-    <span class="wa-float__text">WhatsApp</span>
-</a>
-
+  <!-- WhatsApp Floating Button -->
+  <a class="wa-float wa-float--pulse"
+      href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20quero%20entender%20meu%20caso%20sobre%20fibromialgia."
+      target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+      <span class="wa-float__pulse"></span>
+      <img class="wa-float__icon" src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="" aria-hidden="true" />
+      <span class="wa-float__text">WhatsApp</span>
+  </a>
 
   <!-- MODAL LEAD -->
   <div class="modal" id="leadModal" aria-hidden="true">
@@ -400,10 +436,12 @@
     <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
       <button class="modal__close" type="button" aria-label="Fechar" data-close-modal>✕</button>
 
-      <h3 id="leadTitle">Quero entender meu caso</h3>
-      <p class="modal__sub">
-        Preencha abaixo para receber um direcionamento inicial com clareza.
-      </p>
+      <div class="modal__header">
+        <h3 id="leadTitle">Quero entender meu caso</h3>
+        <p class="modal__sub">
+          Preencha abaixo para receber um direcionamento inicial com clareza.
+        </p>
+      </div>
 
       <form class="form" id="leadForm">
         <div class="form__row">
@@ -426,7 +464,8 @@
           <input name="whatsapp" type="tel" placeholder="(00) 00000-0000" required />
         </div>
 
-        <button class="btn btn--primary form__submit" type="submit">
+        <button class="btn btn--primary btn--pulse form__submit" type="submit">
+          <span class="btn__glow"></span>
           Enviar <span class="btn__arrow">→</span>
         </button>
 
