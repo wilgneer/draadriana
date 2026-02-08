@@ -1,543 +1,394 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Obrigado • Dra. Adriana</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --yellow: #ffdb00;
-      --yellow-light: #ffe74d;
-      --white: #ffffff;
-      --purple: #5c00a8;
-      --purple-2: #6f14c2;
-      --text: #1a1a1a;
-      --muted: rgba(26, 26, 26, 0.72);
-      --radius: 28px;
-      --ease: cubic-bezier(0.4, 0, 0.2, 1);
-      --gradient-primary: linear-gradient(135deg, #ffdb00 0%, #ffa600 100%);
-      --gradient-purple: linear-gradient(135deg, #6f14c2 0%, #5c00a8 100%);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: radial-gradient(ellipse at 20% 20%, rgba(255, 219, 0, 0.12) 0%, rgba(255, 255, 255, 1) 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(92, 0, 168, 0.1) 0%, rgba(255, 255, 255, 1) 55%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(111, 20, 194, 0.05) 0%, transparent 70%);
-      animation: gradientRotate 20s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes gradientRotate {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.1) rotate(5deg); }
-    }
-
-    .card {
-      width: min(780px, 100%);
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: var(--radius);
-      box-shadow: 0 28px 85px rgba(0, 0, 0, 0.18), 0 8px 24px rgba(92, 0, 168, 0.1);
-      padding: clamp(32px, 5vw, 56px);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      animation: slideUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255, 219, 0, 0.05) 0%, rgba(92, 0, 168, 0.05) 100%);
-      opacity: 0;
-      transition: opacity 0.5s var(--ease);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: var(--yellow);
-      animation: confettiFall 3s ease-out forwards;
-    }
-
-    @keyframes confettiFall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(600px) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      border-radius: 999px;
-      background: var(--gradient-primary);
-      font-weight: 900;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      box-shadow: 0 12px 30px rgba(255, 219, 0, 0.3);
-      animation: badgePulse 3s ease-in-out infinite;
-      position: relative;
-    }
-
-    @keyframes badgePulse {
-      0%, 100% { box-shadow: 0 12px 30px rgba(255, 219, 0, 0.3); }
-      50% { box-shadow: 0 16px 40px rgba(255, 219, 0, 0.5); }
-    }
-
-    .badge::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 999px;
-      background: inherit;
-      filter: blur(12px);
-      opacity: 0.4;
-      z-index: -1;
-    }
-
-    .checkmark {
-      width: 100px;
-      height: 100px;
-      margin: 24px auto;
-      border-radius: 50%;
-      background: var(--gradient-primary);
-      display: grid;
-      place-items: center;
-      box-shadow: 0 20px 50px rgba(255, 219, 0, 0.4);
-      animation: scaleIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
-      position: relative;
-    }
-
-    @keyframes scaleIn {
-      from {
-        transform: scale(0) rotate(-180deg);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-      }
-    }
-
-    .checkmark::before {
-      content: "";
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      background: inherit;
-      filter: blur(20px);
-      opacity: 0.3;
-      z-index: -1;
-      animation: pulse-ring 2s ease-out infinite;
-    }
-
-    @keyframes pulse-ring {
-      0% { transform: scale(1); opacity: 0.3; }
-      100% { transform: scale(1.3); opacity: 0; }
-    }
-
-    .checkmark svg {
-      width: 50px;
-      height: 50px;
-      stroke: #1a1a1a;
-      stroke-width: 4;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-      stroke-dasharray: 100;
-      stroke-dashoffset: 100;
-      animation: drawCheck 0.8s ease-out 0.6s forwards;
-    }
-
-    @keyframes drawCheck {
-      to { stroke-dashoffset: 0; }
-    }
-
-    h1 {
-      margin: 20px 0 12px;
-      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-      letter-spacing: -0.02em;
-      line-height: 1.12;
-      font-weight: 900;
-      background: var(--gradient-purple);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: fadeInUp 0.6s var(--ease) 0.4s both;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    p {
-      margin: 0 auto;
-      max-width: 60ch;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 1.08rem;
-      font-weight: 500;
-      animation: fadeInUp 0.6s var(--ease) 0.5s both;
-    }
-
-    .count {
-      margin: 28px auto 0;
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      font-size: 2.5rem;
-      background: linear-gradient(135deg, rgba(92, 0, 168, 0.1) 0%, rgba(111, 20, 194, 0.12) 100%);
-      border: 2px solid rgba(92, 0, 168, 0.15);
-      color: var(--purple);
-      animation: fadeInUp 0.6s var(--ease) 0.6s both, countPulse 1s ease-in-out infinite;
-      position: relative;
-    }
-
-    @keyframes countPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    .count::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 20px;
-      background: var(--gradient-purple);
-      opacity: 0.15;
-      filter: blur(16px);
-      z-index: -1;
-    }
-
-    .actions {
-      margin-top: 28px;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      animation: fadeInUp 0.6s var(--ease) 0.7s both;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 16px 28px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 0.98rem;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s var(--ease);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.5s var(--ease);
-    }
-
-    .btn:hover::before {
-      opacity: 1;
-      animation: shine 1.5s ease-in-out infinite;
-    }
-
-    @keyframes shine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: #1a1a1a;
-      box-shadow: 0 16px 40px rgba(255, 219, 0, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 22px 55px rgba(255, 219, 0, 0.4);
-    }
-
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.8);
-      border: 2px solid rgba(0, 0, 0, 0.1);
-      color: rgba(26, 26, 26, 0.88);
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-ghost:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn svg {
-      width: 20px;
-      height: 20px;
-      transition: transform 0.3s var(--ease);
-    }
-
-    .btn:hover svg {
-      transform: translateX(4px);
-    }
-
-    .note {
-      margin-top: 24px;
-      font-size: 0.92rem;
-      color: rgba(26, 26, 26, 0.64);
-      font-weight: 600;
-      animation: fadeInUp 0.6s var(--ease) 0.8s both;
-    }
-
-    @media (max-width: 560px) {
-      body {
-        padding: 16px;
-      }
-
-      .card {
-        padding: 28px 20px;
-        border-radius: 24px;
-      }
-
-      h1 {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-      }
-
-      p {
-        font-size: 1rem;
-      }
-
-      .count {
-        width: 70px;
-        height: 70px;
-        font-size: 2rem;
-        border-radius: 18px;
-      }
-
-      .btn {
-        width: 100%;
-        padding: 15px 24px;
-        font-size: 0.96rem;
-      }
-
-      .checkmark {
-        width: 80px;
-        height: 80px;
-      }
-
-      .checkmark svg {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    /* Floating particles */
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .particle-1 {
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle, rgba(255, 219, 0, 0.3) 0%, transparent 70%);
-      top: 10%;
-      left: 10%;
-      filter: blur(20px);
-      animation-delay: 0s;
-    }
-
-    .particle-2 {
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle, rgba(92, 0, 168, 0.2) 0%, transparent 70%);
-      bottom: 15%;
-      right: 15%;
-      filter: blur(25px);
-      animation-delay: -3s;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-      }
-      50% {
-        transform: translate(30px, -30px) scale(1.1);
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <!-- Floating particles -->
-  <div class="particle particle-1" aria-hidden="true"></div>
-  <div class="particle particle-2" aria-hidden="true"></div>
-
-  <main class="card">
-    <div class="badge">
-      <span>✓</span>
-      Recebido com sucesso
-    </div>
-
-    <div class="checkmark">
-      <svg viewBox="0 0 52 52">
-        <polyline points="14 27 22 35 38 19" />
-      </svg>
-    </div>
-
-    <h1>Obrigado pela preferência! 🤝</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2D1B4E">
+    <title>Inscrição Confirmada - Dra. Adriana</title>
     
-    <p>
-      Seus dados foram enviados com sucesso. Em breve nossa equipe entrará em contato para te orientar com clareza sobre o seu caso.
-    </p>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <div class="count" id="count">3</div>
+        :root {
+            --purple-dark: #2D1B4E;
+            --purple-medium: #4A2F6E;
+            --gold: #D4AF37;
+            --gold-light: #E8C766;
+            --white: #FFFFFF;
+            --ice: #F8F9FA;
+        }
 
-    <div class="actions">
-      <a class="btn btn-primary" id="goNow" href="index.html">
-        Voltar ao início
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-      <a class="btn btn-ghost" href="https://wa.me/5500000000000" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
-        WhatsApp
-      </a>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-medium) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: checkBounce 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes checkBounce {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            stroke: var(--purple-dark);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .checkmark {
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.5s ease-out 0.6s forwards;
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--purple-dark);
+            margin-bottom: 1rem;
+            animation: fadeIn 0.6s ease-out 0.4s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: #495057;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeIn 0.6s ease-out 0.6s both;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease-out 0.8s both;
+        }
+
+        .info-box p {
+            font-size: 1rem;
+            color: var(--purple-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .info-box strong {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .redirect-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease-out 1s both;
+        }
+
+        .redirect-message svg {
+            width: 32px;
+            height: 32px;
+            fill: #25D366;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .redirect-message p {
+            font-size: 1.05rem;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .countdown {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            animation: countdown 1s ease-in-out infinite;
+        }
+
+        @keyframes countdown {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            animation: fadeIn 0.6s ease-out 1.2s both;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-button svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 0.5s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 1s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1.5s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 2s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 2.5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 3s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 3.5s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 4s; }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 3rem 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .countdown {
+                font-size: 2.5rem;
+            }
+
+            .whatsapp-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas de fundo -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
-    <div class="note">
-      Você será redirecionada automaticamente em instantes
+    <div class="container">
+        <!-- Ícone de Sucesso -->
+        <div class="success-icon">
+            <svg viewBox="0 0 52 52">
+                <path class="checkmark" fill="none" d="M14 27l7.5 7.5L38 18"/>
+            </svg>
+        </div>
+
+        <!-- Título -->
+        <h1>Inscrição Confirmada!</h1>
+
+        <!-- Subtítulo -->
+        <p class="subtitle">
+            Parabéns! Sua vaga para a aula ao vivo está garantida. 
+            Enviamos um e-mail de confirmação com todos os detalhes.
+        </p>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <p>📅 <strong>Data:</strong> 26 de Fevereiro de 2025</p>
+            <p>🕐 <strong>Horário:</strong> 19h00 (Horário de Brasília)</p>
+            <p>💻 <strong>Formato:</strong> 100% Online e Gratuito</p>
+        </div>
+
+        <!-- Mensagem de Redirecionamento -->
+        <div class="redirect-message">
+            <svg viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            <p>Você será redirecionado para nosso grupo VIP do WhatsApp em:</p>
+        </div>
+
+        <!-- Contador Regressivo -->
+        <div class="countdown" id="countdown">3</div>
+
+        <!-- Botão WhatsApp -->
+        <a href="https://chat.whatsapp.com/SEU_LINK_DO_GRUPO_AQUI" id="whatsappButton" class="whatsapp-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Entrar no Grupo VIP Agora
+        </a>
     </div>
-  </main>
 
-  <script>
-    // Redirect configuration
-    const REDIRECT_TO = "index.html"; // or "https://wa.me/55SEUNUMERO"
-    const countEl = document.getElementById("count");
-    const goNow = document.getElementById("goNow");
-
-    let timeLeft = 3;
-    goNow.href = REDIRECT_TO;
-
-    // Countdown timer
-    const timer = setInterval(() => {
-      timeLeft -= 1;
-      if (countEl) countEl.textContent = String(timeLeft);
-      
-      if (timeLeft <= 0) {
-        clearInterval(timer);
-        window.location.href = REDIRECT_TO;
-      }
-    }, 1000);
-
-    // Create confetti effect
-    function createConfetti() {
-      const colors = ['#ffdb00', '#ffa600', '#5c00a8', '#6f14c2'];
-      const confettiCount = 30;
-
-      for (let i = 0; i < confettiCount; i++) {
-        setTimeout(() => {
-          const confetti = document.createElement('div');
-          confetti.className = 'confetti';
-          confetti.style.left = Math.random() * 100 + '%';
-          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-          confetti.style.animationDelay = Math.random() * 0.5 + 's';
-          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-          
-          document.body.appendChild(confetti);
-
-          // Remove confetti after animation
-          setTimeout(() => {
-            confetti.remove();
-          }, 3500);
-        }, i * 50);
-      }
-    }
-
-    // Trigger confetti on load
-    window.addEventListener('load', () => {
-      setTimeout(createConfetti, 300);
-    });
-
-    // Track page view (if you have analytics)
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'page_view', {
-        'page_title': 'Thank You Page',
-        'page_location': window.location.href,
-        'page_path': '/obrigado.html'
-      });
-    }
-  </script>
+    <script>
+        // Link do grupo do WhatsApp - SUBSTITUA AQUI
+        const whatsappGroupLink = 'https://chat.whatsapp.com/SEU_LINK_DO_GRUPO_AQUI';
+        
+        // Atualizar todos os links
+        document.getElementById('whatsappButton').href = whatsappGroupLink;
+        
+        // Contador regressivo
+        let seconds = 3;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdownInterval = setInterval(() => {
+            seconds--;
+            countdownElement.textContent = seconds;
+            
+            if (seconds === 0) {
+                clearInterval(countdownInterval);
+                countdownElement.textContent = '🚀';
+                
+                // Redirecionar após 3 segundos
+                setTimeout(() => {
+                    window.location.href = whatsappGroupLink;
+                }, 500);
+            }
+        }, 1000);
+        
+        // Analytics (opcional)
+        console.log('Página de agradecimento carregada');
+        
+        // Se quiser track no Google Analytics
+        // gtag('event', 'conversion', {'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL'});
+    </script>
 </body>
 </html>

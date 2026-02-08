@@ -1,172 +1,303 @@
-// ====================================
-// MOBILE MENU
-// ====================================
-const burger = document.getElementById("burger");
-const mobileNav = document.getElementById("mobileNav");
-
-if (burger && mobileNav) {
-  burger.addEventListener("click", () => {
-    const isOpen = mobileNav.style.display === "block";
-    mobileNav.style.display = isOpen ? "none" : "block";
-    burger.classList.toggle("active");
-  });
-
-  mobileNav.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", () => {
-      mobileNav.style.display = "none";
-      burger.classList.remove("active");
-    });
-  });
-}
-
-// ====================================
-// SMOOTH SCROLL (offset dinâmico)
-// ====================================
+// ========================================
+// NAVEGAÇÃO SUAVE
+// ========================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", (e) => {
-    const id = anchor.getAttribute("href");
-    const target = document.querySelector(id);
-
-    if (!target) return;
-
+  anchor.addEventListener('click', function (e) {
     e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      const headerOffset = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-    const header = document.querySelector('.topbar');
-    const offset = (header && window.getComputedStyle(header).display !== 'none') ? header.offsetHeight : 0;
-
-    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-
-    window.scrollTo({
-      top: targetPosition,
-      behavior: "smooth"
-    });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   });
 });
 
-// ====================================
-// REVEAL ON SCROLL (Intersection Observer)
-// ====================================
-const revealElements = document.querySelectorAll("[data-reveal]");
+// ========================================
+// HEADER SCROLL EFFECT
+// ========================================
+const header = document.querySelector('.site-header');
+let lastScroll = 0;
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("revealed");
-      }
-    });
-  },
-  {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+
+  if (header) {
+    if (currentScroll > 100) {
+      header.style.boxShadow = '0 4px 20px rgba(45, 27, 78, 0.15)';
+    } else {
+      header.style.boxShadow = '0 2px 8px rgba(45, 27, 78, 0.1)';
+    }
   }
-);
 
-revealElements.forEach((el) => revealObserver.observe(el));
+  lastScroll = currentScroll;
+});
 
-// ====================================
-// MODAL LEAD
-// ====================================
-const modal = document.getElementById("leadModal");
-const openButtons = document.querySelectorAll(".js-open-lead");
-const closeTargets = modal ? modal.querySelectorAll("[data-close-modal]") : [];
-const leadForm = document.getElementById("leadForm");
-const formStatus = document.getElementById("formStatus");
+// ========================================
+// MODAL FUNCTIONALITY
+// ========================================
+const modal = document.getElementById('leadModal');
+const modalClose = document.getElementById('modalClose');
+const openModalButtons = document.querySelectorAll('[data-open-modal]');
 
-function openModal() {
-  if (!modal) return;
+// Abrir modal
+openModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (!modal) return;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
 
-  modal.classList.add("is-open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-
-  const firstInput = modal.querySelector("input[name='nome']");
-  if (firstInput) setTimeout(() => firstInput.focus(), 100);
+// Fechar modal
+if (modalClose) {
+  modalClose.addEventListener('click', () => {
+    if (!modal) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
 }
 
-function closeModal() {
-  if (!modal) return;
-
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
+// Fechar ao clicar fora
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
 }
 
-openButtons.forEach((btn) => btn.addEventListener("click", openModal));
-closeTargets.forEach((el) => el.addEventListener("click", closeModal));
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal?.classList.contains("is-open")) {
-    closeModal();
+// Fechar com ESC
+document.addEventListener('keydown', (e) => {
+  if (!modal) return;
+  if (e.key === 'Escape' && modal.classList.contains('active')) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
   }
 });
 
-// ====================================
-// FORM SUBMISSION (simulado)
-// ====================================
+// ========================================
+// FORMULÁRIO DE LEAD
+// ========================================
+const leadForm = document.getElementById('leadForm');
+const formFeedback = document.getElementById('formFeedback');
+
 if (leadForm) {
-  leadForm.addEventListener("submit", async (e) => {
+  leadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(leadForm);
-    const data = Object.fromEntries(formData.entries());
+    // Coletar dados
+    const formData = {
+      nome: document.getElementById('nome')?.value || '',
+      email: document.getElementById('email')?.value || '',
+      profissao: document.getElementById('profissao')?.value || '',
+      whatsapp: document.getElementById('whatsapp')?.value || '',
+      timestamp: new Date().toISOString()
+    };
 
-    if (!data.nome || !data.email || !data.whatsapp) {
-      if (formStatus) {
-        formStatus.textContent = "Por favor, preencha Nome, Email e WhatsApp.";
-        formStatus.style.color = "#ff0000";
+    try {
+      // Aqui você integraria com sua API, Google Sheets, etc.
+      console.log('Dados do lead:', formData);
+
+      // (Opcional) feedback instantâneo antes do redirect
+      if (formFeedback) {
+        formFeedback.style.display = 'block';
+        formFeedback.className = 'form-feedback success';
+        formFeedback.textContent = '✓ Enviando...';
       }
-      return;
-    }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-      if (formStatus) {
-        formStatus.textContent = "Por favor, insira um email válido.";
-        formStatus.style.color = "#ff0000";
+      // Simular delay de envio
+      await new Promise(resolve => setTimeout(resolve, 1200));
+
+      // (Opcional) salvar dados para usar na página obrigado.html
+      sessionStorage.setItem('lead_nome', formData.nome);
+      sessionStorage.setItem('lead_email', formData.email);
+      sessionStorage.setItem('lead_profissao', formData.profissao);
+      sessionStorage.setItem('lead_whatsapp', formData.whatsapp);
+      sessionStorage.setItem('lead_timestamp', formData.timestamp);
+
+      // Redirecionar para página de obrigado
+      window.location.href = 'obrigado.html';
+
+    } catch (error) {
+      if (formFeedback) {
+        formFeedback.style.display = 'block';
+        formFeedback.className = 'form-feedback error';
+        formFeedback.textContent = '✗ Erro ao processar inscrição. Tente novamente.';
       }
-      return;
+      console.error(error);
     }
-
-    if (formStatus) {
-      formStatus.textContent = "Enviando...";
-      formStatus.style.color = "#5c00a8";
-    }
-
-    // Simula API
-    await new Promise(resolve => setTimeout(resolve, 800));
-
-    if (formStatus) {
-      formStatus.textContent = "Recebido! Redirecionando... ✓";
-      formStatus.style.color = "#25D366";
-    }
-
-    leadForm.reset();
-
-    setTimeout(() => {
-      window.location.href = "obrigado.html";
-    }, 1000);
   });
 }
 
-// ====================================
-// TOPBAR SHADOW ON SCROLL
-// ====================================
-const topbar = document.querySelector(".topbar");
+// Máscara para WhatsApp
+const whatsappInput = document.getElementById('whatsapp');
+if (whatsappInput) {
+  whatsappInput.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    topbar?.classList.add("scrolled");
-  } else {
-    topbar?.classList.remove("scrolled");
-  }
+    if (value.length <= 11) {
+      value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+      value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+    }
+
+    e.target.value = value;
+  });
+}
+
+// ========================================
+// FAQ ACCORDION
+// ========================================
+const faqQuestions = document.querySelectorAll('.faq-question');
+
+faqQuestions.forEach(question => {
+  question.addEventListener('click', () => {
+    const isExpanded = question.getAttribute('aria-expanded') === 'true';
+    const answer = question.nextElementSibling;
+
+    // Fechar todas as outras
+    faqQuestions.forEach(q => {
+      if (q !== question) {
+        q.setAttribute('aria-expanded', 'false');
+        if (q.nextElementSibling) q.nextElementSibling.style.maxHeight = null;
+      }
+    });
+
+    // Toggle atual
+    question.setAttribute('aria-expanded', String(!isExpanded));
+
+    if (!isExpanded) {
+      if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
+    } else {
+      if (answer) answer.style.maxHeight = null;
+    }
+  });
 });
 
-const style = document.createElement("style");
-style.textContent = `
-  .topbar.scrolled {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    background: rgba(255, 255, 255, 0.92);
+// ========================================
+// GALERIA CAROUSEL
+// ========================================
+const galleryTrack = document.getElementById('galleryTrack');
+const prevButton = document.getElementById('galleryPrev');
+const nextButton = document.getElementById('galleryNext');
+
+let scrollAmount = 0;
+const scrollStep = 420; // largura do item + gap
+
+if (prevButton && galleryTrack) {
+  prevButton.addEventListener('click', () => {
+    scrollAmount = Math.max(0, scrollAmount - scrollStep);
+    galleryTrack.scrollTo({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+  });
+}
+
+if (nextButton && galleryTrack) {
+  nextButton.addEventListener('click', () => {
+    const maxScroll = galleryTrack.scrollWidth - galleryTrack.clientWidth;
+    scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
+    galleryTrack.scrollTo({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+  });
+}
+
+// Atualizar posição ao arrastar
+if (galleryTrack) {
+  galleryTrack.addEventListener('scroll', () => {
+    scrollAmount = galleryTrack.scrollLeft;
+  });
+}
+
+// ========================================
+// ANIMAÇÕES DE ENTRADA
+// ========================================
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+// Elementos para animar
+document.querySelectorAll('.pillar-card, .topic-item, .gallery-item, .faq-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// ========================================
+// CONTADOR REGRESSIVO (OPCIONAL)
+// ========================================
+function updateCountdown() {
+  // OBS: data passada no seu código original (2025). Ajuste se precisar.
+  const eventDate = new Date('2025-02-26T19:00:00').getTime();
+  const now = new Date().getTime();
+  const distance = eventDate - now;
+
+  if (distance > 0) {
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+    console.log(`Faltam ${days}d ${hours}h ${minutes}m para a aula`);
   }
-`;
-document.head.appendChild(style);
+}
+
+// Atualizar a cada minuto
+setInterval(updateCountdown, 60000);
+updateCountdown();
+
+// ========================================
+// PERFORMANCE: LAZY LOADING IMAGES
+// ========================================
+if ('loading' in HTMLImageElement.prototype) {
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  images.forEach(img => {
+    // Só troca se existir data-src
+    if (img.dataset && img.dataset.src) img.src = img.dataset.src;
+  });
+} else {
+  // Fallback para navegadores antigos
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+  document.body.appendChild(script);
+}
+
+// ========================================
+// ANALYTICS (PLACEHOLDER)
+// ========================================
+function trackEvent(category, action, label) {
+  console.log('Event tracked:', { category, action, label });
+  // Aqui você integraria com Google Analytics, Facebook Pixel, etc.
+}
+
+// Rastrear cliques nos botões CTA
+openModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    trackEvent('CTA', 'Click', 'Open Modal');
+  });
+});
+
+// ========================================
+// CONSOLE MESSAGE
+// ========================================
+console.log('%c🎯 Landing Page - Dra. Adriana', 'font-size: 20px; font-weight: bold; color: #D4AF37;');
+console.log('%cDesenvolvido com atenção aos detalhes', 'font-size: 12px; color: #2D1B4E;');
