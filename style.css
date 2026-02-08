@@ -394,7 +394,7 @@ a {
 
 .section-subtitle {
     font-size: 1.15rem;
-    color: var(--gray-medium);
+    color: var(--gray-dark);
     line-height: 1.8;
 }
 
@@ -1176,5 +1176,6 @@ a {
     object-position: center top;
   }
 }
+
 
 
