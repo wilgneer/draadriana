@@ -7,14 +7,15 @@
     <meta name="theme-color" content="#2D1B4E">
     <title>Fibroprev</title>
     
-    <link rel="preload" as="image" href="assets/menorpx-v1.webp">
-    <link rel="preload" as="image" href="assets/final_mobile-v1.webp">
+    <script src="performance.js?v=1.0.4"></script>
+    <link rel="preload" as="image" href="assets/final_mobile.webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/menorpx.webp" media="(min-width: 769px)" fetchpriority="high">
     <!-- Seu CSS principal (não bloqueante) -->
-    <link rel="preload" as="style" href="style.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="style.css?v=1.0.4" onload="this.onload=null;this.rel='stylesheet'">
         <noscript>
-            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="style.css?v=1.0.4">
         </noscript>
-    <link rel="stylesheet" href="style.css?v=1.0.3">
+    
 </head>
 <body>
 
@@ -41,10 +42,10 @@
     <main id="topo">
         <header class="hero">
             <div class="hero-mobile-image">
-                <img src="assets/final_mobile-v1.webp" alt="Dra Adriana">
+                <img src="assets/final_mobile-v1.webp" alt="Dra Adriana" fetchpriority="high" decoding="async" loading="eager">
             </div>
             <section class="hero-simple">
-                <img src="assets/menorpx-v1.webp" alt="Dra. Adriana" class="hero-bg">
+                <img src="assets/menorpx-v1.webp" alt="Dra. Adriana" class="hero-bg" fetchpriority="high" decoding="async" loading="eager">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <span class="hero-label">Aula Ao Vivo Gratuita</span>
@@ -502,7 +503,7 @@
     </footer>
 
     
-
-    <script src="script.js?v=1.0.3" defer></script>
+    
+    <script src="script.js?v=1.0.4" defer></script>
 </body>
 </html>
